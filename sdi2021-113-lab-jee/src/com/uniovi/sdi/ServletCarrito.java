@@ -52,7 +52,7 @@ public class ServletCarrito extends HttpServlet {
 		out.println("<head><title>Tienda SDI: carrito</title></head>");
 		out.println("<body>");
 		out.println(carritoEnHTML(carrito) + "<br>");
-		out.println("<a href=\"tienda.html\">Volver</a></body></html>");
+		out.println("<a href=\"index.jsp\">Volver</a></body></html>");
 	}
 
 	/**
