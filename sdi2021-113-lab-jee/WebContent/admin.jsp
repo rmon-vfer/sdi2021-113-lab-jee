@@ -11,6 +11,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
+<jsp:useBean id="producto" class="com.uniovi.sdi.Producto"/>
+<jsp:setProperty name="producto" property="*" />
+
 <body>
 
 	<%
@@ -23,22 +27,12 @@
 		}
 	%>
 	<%
-	if	( request.getParameter("nombre") != null && 
-		  request.getParameter("imagen") != null && 
-		  request.getParameter("precio") != null) {
-		
-		String nombre = (String) request.getParameter("nombre");
-		String imagen = (String) request.getParameter("imagen");
-		float precio = Float.parseFloat(request.getParameter("precio"));
-		
-		Producto producto =	new Producto(nombre, imagen, precio);
-		
-		new	ProductosService().setNuevoProducto(producto);
-		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-	}
+		if (producto.getNombre() != null){
+			new ProductosService().setNuevoProducto(producto);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	%>
-	%>
+	
 	<!-- Contenido	-->
 	<div class="container" id="contenedor-principal">
 		<h2>Agregar producto a la tienda</h2>

@@ -10,6 +10,8 @@ public class Producto {
 		this.imagen = imagen;
 		this.precio = precio;
 	}
+	
+	public Producto() { /* Nada aquí */ }
 
 	public String getNombre() {
 		return nombre;
