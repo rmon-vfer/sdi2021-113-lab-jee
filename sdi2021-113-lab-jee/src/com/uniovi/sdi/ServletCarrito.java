@@ -45,6 +45,9 @@ public class ServletCarrito extends HttpServlet {
 			insertarEnCarrito(carrito, producto);
 		}
 		
+		request.setAttribute("paresCarrito", carrito);
+		getServletContext().getRequestDispatcher("/vista-carrito.jsp").forward(request, response);
+		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
