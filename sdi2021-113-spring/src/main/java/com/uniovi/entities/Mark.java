@@ -17,8 +17,7 @@ public class Mark {
 		this.score = score;
 	}
 
-	public Mark() {
-		/* Nada aquí */ }
+	public Mark() { /* Nada aquí */ }
 
 	public Long getId() {
 		return id;
