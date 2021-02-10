@@ -13,40 +13,18 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<jsp:useBean id="contador" class="com.uniovi.sdi.Contador" scope="application"/>
-<jsp:setProperty name="contador" property="incremento" value="1" />
-
 <body>
-	<!-- Barra de Navegación superior -->
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<ul class="nav navbar-nav">
-				<li><a href="incluirEnCarrito">Carrito</a></li>
-				<li><a href="login.jsp">Login</a></li>
-				<li><a href="admin.jsp">Administrar productos</a></li>
-				<li><a href="productos">Ver productos</a></li>
-			</ul>
-			<div class="nav navbar-right">
-				<jsp:getProperty property="total" name="contador"/>
-				Visitas
-			</div>
-		</div>
-	</nav>
-
 	<!-- Contenido -->
-	<h2>Productos</h2>
+	<h2>Productos en tienda</h2>
 	<div class="row">
 		<jsp:useBean id="productosService" class="com.uniovi.sdi.ProductosService"/>
-		<c:forEach var="producto" begin="0" items="${productosService.productos }">
+		<c:forEach var="producto" begin="0" items="${ productosService.productos }">
 		
 			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 				<div>
 					<img src="<c:out value="${producto.imagen}"/>" />
 					<div><c:out value="${producto.nombre}"/></div>
-					
-					<a href="incluirEnCarrito?producto=<c:out value="${producto.nombre}"/>" class="btn btndefault"> 
-						<c:out value="${producto.precio}"/> €
-					</a>
+					<div><c:out value="${producto.precio}"/> €</div>
 				</div>
 			</div>
 			

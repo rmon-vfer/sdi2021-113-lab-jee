@@ -11,7 +11,7 @@ public class Producto {
 		this.precio = precio;
 	}
 	
-	public Producto() { /* Nada aquí */ }
+	public Producto() { /* Nada aquï¿½ */ }
 
 	public String getNombre() {
 		return nombre;
@@ -35,5 +35,10 @@ public class Producto {
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
+	}
+	
+	@Override
+	public String toString() {
+		return "Producto [ Nombre: " + nombre + ", Precio: " + precio +  ", Imagen: " + imagen + "]";
 	}
 }
