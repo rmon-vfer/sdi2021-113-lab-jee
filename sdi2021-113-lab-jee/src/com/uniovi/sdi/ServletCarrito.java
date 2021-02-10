@@ -12,50 +12,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class ServletCarrito
- */
 @WebServlet("/incluirEnCarrito")
 public class ServletCarrito extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ServletCarrito() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		
 		HashMap<String, Integer> carrito = 
 				(HashMap<String, Integer>) request.getSession().getAttribute("carrito");
 		
 		if (carrito == null) { // Si no hay carrito...
-			//... creamos uno y lo insertamos en sesión
+			//... creamos uno y lo insertamos en sesion
 			carrito = new HashMap<String, Integer>();
 			request.getSession().setAttribute("carrito", carrito);
 		}
 		
 		String producto = request.getParameter("producto");
-		if (producto != null) {
-			insertarEnCarrito(carrito, producto);
+		String remove = request.getParameter("remove");
+		
+		if ( remove != null && remove.toLowerCase().equals("true") ) {
+			// Eliminar el producto del carrito
+			if (carrito.get( producto ) != null) {
+				carrito.remove( producto );
+			}
+		} else {
+			if (producto != null) {
+				insertarEnCarrito(carrito, producto);
+			}
 		}
 		
 		request.setAttribute("paresCarrito", carrito);
 		getServletContext().getRequestDispatcher("/vista-carrito.jsp").forward(request, response);
-		
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		out.println("<head><title>Tienda SDI: carrito</title></head>");
-		out.println("<body>");
-		out.println(carritoEnHTML(carrito) + "<br>");
-		out.println("<a href=\"index.jsp\">Volver</a></body></html>");
 	}
 
 	/**
@@ -73,7 +65,7 @@ public class ServletCarrito extends HttpServlet {
 			int numeroArticulos = (Integer) carrito.get(claveProducto).intValue();
 			carrito.put(claveProducto, new Integer(numeroArticulos +1));
 		}
-	}
+	}	
 	
 	private String carritoEnHTML(Map<String, Integer> carrito) {
 		String carritoEnHTML = "";

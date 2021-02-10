@@ -25,14 +25,9 @@ public class ServletProductos extends HttpServlet {
 			throws ServletException, IOException {
 		List<Producto> productosTienda = new ProductosService().getProductos();
 		
-		response.setContentType("text/plain");
-		PrintWriter out = response.getWriter();
-		
-		out.println("Productos en la base de datos:");
-		
-		for ( Producto p : productosTienda ) {
-			out.println( p.toString() );
-		}
+		request.setAttribute("productosTienda", productosTienda);
+		getServletContext().getRequestDispatcher("/vista-productos.jsp").forward(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

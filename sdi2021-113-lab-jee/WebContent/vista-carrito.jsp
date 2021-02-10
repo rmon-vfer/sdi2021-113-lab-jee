@@ -1,15 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html	PUBLIC "-//W3C//DTD	HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-	<title>JSP</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>JSP</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<!-- Contenido -->
@@ -17,7 +18,17 @@
 		<h2>Vista-Carrito</h2>
 		<ul>
 			<c:forEach var="par" items="${paresCarrito}">
-				<li>${par.key}- ${par.value}</li>
+
+				<div class="row">
+					<div class="col-6"><c:out value="${par.key}" /></div>
+					<div class="col-4"><c:out value="${par.value}" /></div>
+					<div class="col-2">
+						<a class="btn btn-danger"
+						href="incluirEnCarrito?remove=true&producto=<c:out value="${par.key}"/>"
+						role="button">Eliminar</a>
+					</div>
+				</div>
+
 			</c:forEach>
 		</ul>
 	</div>
