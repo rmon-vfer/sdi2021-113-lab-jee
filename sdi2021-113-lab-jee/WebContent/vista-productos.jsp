@@ -17,14 +17,13 @@
 	<!-- Contenido -->
 	<h2>Productos en tienda</h2>
 	<div class="row">
-		<jsp:useBean id="productosService" class="com.uniovi.sdi.ProductosService"/>
-		<c:forEach var="producto" begin="0" items="${ productosService.productos }">
+		<c:forEach var="producto" begin="0" items="${ productosTienda }">
 		
 			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 				<div>
 					<img src="<c:out value="${producto.imagen}"/>" />
 					<div><c:out value="${producto.nombre}"/></div>
-					<div><c:out value="${producto.precio}"/> €</div>
+					<div><c:out value="${producto.precio}"/> € </div>
 				</div>
 			</div>
 			
