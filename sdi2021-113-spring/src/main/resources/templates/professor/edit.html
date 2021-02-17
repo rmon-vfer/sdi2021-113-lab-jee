@@ -33,20 +33,44 @@
 </nav>
 
 <div class="container">
-  <h2>Eliminar profesor</h2>
-  <form class="form-horizontal" method="get" action="/professor/delete">
+  <h2>Editar profesor</h2>
+  <form class="form-horizontal" method="post" th:action="${ '/professor/edit/' + professor.id}">
+  
     <div class="form-group">
-      <label class="control-label col-sm-2" for="id">ID del profesor: </label>
+      <label class="control-label col-sm-2" for="description">DNI</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" name="id" placeholder="123444" required="true" />
+        <input th:value="${professor.dni}" type="text" class="form-control" name="dni" placeholder="DNI" required="true" />
       </div>
     </div>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="description">Nombre</label>
+      <div class="col-sm-10">
+        <input th:value="${professor.nombre}" type="text" class="form-control" name="nombre" placeholder="nombre" required="true" />
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="description">Apellidos</label>
+      <div class="col-sm-10">
+        <input th:value="${professor.apellidos}" type="text" class="form-control" name="apellidos" placeholder="Apellidos" required="true" />
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="description">Categoria</label>
+      <div class="col-sm-10">
+        <input th:value="${professor.categoria}" type="text" class="form-control" name="categoria" placeholder="Categoria" required="true" />
+      </div>
+    </div>
+    
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <button type="submit" class="btn btn-danger">Modificar</button>
       </div>
     </div>
   </form>
 </div>
+
 </body>
 </html>
