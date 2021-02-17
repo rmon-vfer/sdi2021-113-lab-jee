@@ -39,8 +39,9 @@ public class ProfessorsController {
 	
 	// Ver detalle
 	@RequestMapping("/professor/details/{id}")
-	public String getDetail( @PathVariable Long id) {
-		return "Details for professor with id " + id + ": " +  professorsService.getProfessor(id).toString();
+	public String getDetail( Model model, @PathVariable Long id) {
+		model.addAttribute("professor", professorsService.getProfessor(id));
+		return "professor/details";
 	}
 	
 	// Eliminar
@@ -52,10 +53,9 @@ public class ProfessorsController {
 	
 	// Editar
 	@RequestMapping(value = "/professor/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(@PathVariable Long id, @ModelAttribute Professor professor) {
-		professorsService.deleteProfessor(id);
+	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute Professor professor) {
 		professor.setId(id);
-		professorsService.addProfessor(professor);
-		return "Modified professor with id " + id;
+		professorsService.addProfessor( professor );
+		return "redirect:/professor/details/" + id;
 	}
 }
