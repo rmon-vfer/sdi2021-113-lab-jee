@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Notaneitor</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- Barra de Navegación superior -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <img src="/img/student-48.png" alt="logo"/>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="/professor/list">Ver Profesores</a></li>
+		<li class="active"><a href="/professor/add">Agregar Profesor</a></li>
+        <li><a href="/professor/remove">Eliminar profesor</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>Profesores</h2>
+  <p>Profesores que constan en el sistema:</p>                                                                                      
+  <div class="table-responsive">          
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-1">id</th>
+		<th class="col-md-1">DNI</th>
+		<th class="col-md-1">Nombre</th>
+		<th class="col-md-1">Apellidos</th>
+		<th class="col-md-1">Categoria</th>
+      </tr>
+    </thead>
+	<tbody>
+	  <tr th:each="professor : ${professorList}">
+	    <td th:text="${professor.id}"></td>
+	    <td th:text="${professor.nombre"></td>
+	    <td th:text="${professor.apellidos}"></td>
+	    <td th:text="${professor.categoria}"></td>
+	  </tr>
+	</tbody>
+  </table>
+  </div>
+</div>
+
+
+</body>
+</html>
