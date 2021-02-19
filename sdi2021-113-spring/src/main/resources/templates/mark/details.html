@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Notaneitor</title>
+<title>SDI2021-811 Marks App</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
@@ -40,20 +40,23 @@
 		</div>
 	</nav>
 
-
-
 	<div class="container">
 		<h2>Detalles de la nota</h2>
 		<div class="panel panel-default">
+			<div class="panel-heading">DNI</div>
+			<div class="panel-body" th:text="${mark.user.dni}">28276</div>
+		</div>
+		<div class="panel panel-default">
 			<div class="panel-heading">Descripción</div>
 			<div class="panel-body" th:text="${mark.description}">
-				UO11111@uniovi.es</div>
+				Ejercicio 1</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">Puntuación</div>
 			<div class="panel-body" th:text="${mark.score}">100</div>
 		</div>
 	</div>
+
 
 </body>
 </html>
