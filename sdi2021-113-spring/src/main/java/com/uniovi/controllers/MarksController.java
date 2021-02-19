@@ -7,28 +7,27 @@ import org.springframework.web.bind.annotation.*;
 
 import com.uniovi.entities.Mark;
 import com.uniovi.services.MarksService;
-
-/*
- * Spring trata todas las peticiones como GET por defecto,
- * para responder a peticiones POST hay que especificarlo
- * en la anotación @RequestMapping
- */
+import com.uniovi.services.UsersService;
 
 @Controller
 public class MarksController {
 
-	@Autowired // Inyectar el servicio
+	@Autowired
 	private MarksService marksService;
+
+	@Autowired
+	private UsersService usersService;
 
 	@RequestMapping("/mark/list")
 	public String getList(Model model) {
 		model.addAttribute("markList", marksService.getMarks());
-		return "mark/list"; // fichero list.html dentro de la carpeta mark
+		return "/mark/list";
 	}
 
-	@RequestMapping(value = "/mark/add")
-	public String getMark() {
-		return "mark/add";
+	@RequestMapping("/mark/list/update")
+	public String updateList(Model model) {
+		model.addAttribute("markList", marksService.getMarks());
+		return "/mark/list :: tableMarks";
 	}
 
 	@RequestMapping(value = "/mark/add", method = RequestMethod.POST)
@@ -38,7 +37,7 @@ public class MarksController {
 	}
 
 	@RequestMapping("/mark/details/{id}")
-	public String getDetail(Model model, @PathVariable Long id) {
+	public String getDetail(Model model, @PathVariable long id) {
 		model.addAttribute("mark", marksService.getMark(id));
 		return "mark/details";
 	}
@@ -49,22 +48,25 @@ public class MarksController {
 		return "redirect:/mark/list";
 	}
 
+	@RequestMapping("/mark/add")
+	public String getMark(Model model) {
+		model.addAttribute("usersList", usersService.getUsers());
+		return "mark/add";
+	}
+
 	@RequestMapping(value = "/mark/edit/{id}")
 	public String getEdit(Model model, @PathVariable Long id) {
 		model.addAttribute("mark", marksService.getMark(id));
+		model.addAttribute("usersList", usersService.getUsers());
 		return "mark/edit";
 	}
 
 	@RequestMapping(value = "/mark/edit/{id}", method = RequestMethod.POST)
 	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute Mark mark) {
-		mark.setId(id);
-		marksService.addMark(mark);
+		Mark original = marksService.getMark(id);
+		original.setScore(mark.getScore());
+		original.setDescription(mark.getDescription());
+		marksService.addMark(original);
 		return "redirect:/mark/details/" + id;
-	}
-
-	@RequestMapping("/mark/list/update")
-	public String updateList(Model model) {
-		model.addAttribute("markList", marksService.getMarks());
-		return "mark/list :: tableMarks";
 	}
 }
