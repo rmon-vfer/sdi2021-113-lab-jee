@@ -24,6 +24,13 @@ public class InsertSampleDataService {
 		User user5 = new User("99999977E", "Pelayo", "Valdes");
 		User user6 = new User("99999988F", "Edward", "Núñez");
 
+		user1.setPassword("123456");
+		user2.setPassword("123456");
+		user3.setPassword("123456");
+		user4.setPassword("123456");
+		user5.setPassword("123456");
+		user6.setPassword("123456");
+
 		Set user1Marks = new HashSet<Mark>() {
 			{
 				add(new Mark("Nota A1", 10.0, user1));
@@ -71,5 +78,4 @@ public class InsertSampleDataService {
 		usersService.addUser(user6);
 
 	}
-
 }
