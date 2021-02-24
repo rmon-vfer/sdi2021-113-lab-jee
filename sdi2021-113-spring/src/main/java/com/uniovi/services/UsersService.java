@@ -48,5 +48,9 @@ public class UsersService {
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);
 	}
-
+	
+	public void editUser(User user) {
+		// Sobreescribir el usuario
+		usersRepository.save(user);
+	}
 }
