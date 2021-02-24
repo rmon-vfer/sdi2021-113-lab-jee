@@ -3,11 +3,14 @@ package com.uniovi.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.uniovi.entities.Mark;
 import com.uniovi.services.MarksService;
 import com.uniovi.services.UsersService;
+import com.uniovi.validators.AddMarkValidator;
 
 @Controller
 public class MarksController {
@@ -17,6 +20,9 @@ public class MarksController {
 
 	@Autowired
 	private UsersService usersService;
+
+	@Autowired
+	private AddMarkValidator addMarkValidator;
 
 	@RequestMapping("/mark/list")
 	public String getList(Model model) {
@@ -31,9 +37,21 @@ public class MarksController {
 	}
 
 	@RequestMapping(value = "/mark/add", method = RequestMethod.POST)
-	public String setMark(@ModelAttribute Mark mark) {
+	public String setMark(Model model, @Validated Mark mark, BindingResult result) {
+		addMarkValidator.validate(mark, result);
+		model.addAttribute("usersList", usersService.getUsers());
+		if (result.hasErrors()) {
+			return "mark/add";
+		}
 		marksService.addMark(mark);
 		return "redirect:/mark/list";
+	}
+
+	@RequestMapping("/mark/add")
+	public String getMark(Model model) {
+		model.addAttribute("mark", new Mark());
+		model.addAttribute("usersList", usersService.getUsers());
+		return "mark/add";
 	}
 
 	@RequestMapping("/mark/details/{id}")
@@ -46,12 +64,6 @@ public class MarksController {
 	public String deleteMark(@PathVariable Long id) {
 		marksService.deleteMark(id);
 		return "redirect:/mark/list";
-	}
-
-	@RequestMapping("/mark/add")
-	public String getMark(Model model) {
-		model.addAttribute("usersList", usersService.getUsers());
-		return "mark/add";
 	}
 
 	@RequestMapping(value = "/mark/edit/{id}")

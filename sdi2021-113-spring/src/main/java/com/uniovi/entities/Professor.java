@@ -4,35 +4,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-
 @Entity
 public class Professor {
 	@Id
 	@GeneratedValue
-	private Long id;
-	
+
 	private String dni;
 	private String nombre;
 	private String apellidos;
 	private String categoria;
-	
-	public Professor(Long id, String dni, String nombre, String apellidos, String categoria) {
+
+	public Professor(String dni, String nombre, String apellidos, String categoria) {
 		super();
-		this.id = id;
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.categoria = categoria;
 	}
 
-	public Professor() { /* Nada aquí */ }
-	
-	public Long getId() {
-		return id;
-	}
+	public Professor() {
 
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getDni() {
@@ -66,9 +57,11 @@ public class Professor {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Professor [dni=" + dni + ", nombre= " + nombre + ", apellidos=" + apellidos + ", categoria=" + categoria +"]";
+		return "DNI: " + String.valueOf(dni) + " Nombre: " + nombre + " Apellidos: " + apellidos + " Categoría: "
+				+ categoria;
 	}
+
 }

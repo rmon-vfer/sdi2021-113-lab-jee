@@ -11,25 +11,29 @@ import com.uniovi.repositories.ProfessorsRepository;
 
 @Service
 public class ProfessorsService {
-	
+
 	@Autowired
-	ProfessorsRepository professorsRepository;
+	private ProfessorsRepository professorRepository;
 
 	public List<Professor> getProfessors() {
-		List<Professor> profesores = new ArrayList<Professor>();
-		professorsRepository.findAll().forEach(profesores::add); 
-		return profesores;
+		List<Professor> professors = new ArrayList<Professor>();
+		professorRepository.findAll().forEach(professors::add);
+		return professors;
 	}
 
-	public Professor getProfessor(Long id) {
-		return professorsRepository.findById(id).get();
+	public Professor getProfessor(Long dni) {
+		return professorRepository.findById(dni).get();
 	}
 
 	public void addProfessor(Professor prof) {
-		professorsRepository.save(prof);
+		professorRepository.save(prof);
 	}
 
 	public void deleteProfessor(Long id) {
-		professorsRepository.deleteById(id);
+		professorRepository.deleteById(id);
+	}
+
+	public Professor getProfessorByDni(String dni) {
+		return professorRepository.findByDni(dni);
 	}
 }
