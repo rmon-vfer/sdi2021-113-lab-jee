@@ -16,8 +16,8 @@ public class User {
 	private String name;
 	private String lastName;
 	private String role;
-
 	private String password;
+	
 	@Transient // No almacenada en la tabla
 	private String passwordConfirm;
 
@@ -31,9 +31,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public User() {
-
-	}
+	public User() { /**/ }
 
 	public String getPassword() {
 		return password;
@@ -93,5 +91,13 @@ public class User {
 
 	public String getFullName() {
 		return this.name + " " + this.lastName;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }
