@@ -4,12 +4,22 @@ import javax.persistence.*;
 
 @Entity
 public class Mark {
-
 	@Id
 	@GeneratedValue
+
 	private Long id;
+
+	public Boolean getResend() {
+		return resend;
+	}
+
+	public void setResend(Boolean resend) {
+		this.resend = resend;
+	}
+
 	private String description;
 	private Double score;
+	private Boolean resend = false;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -30,6 +40,7 @@ public class Mark {
 	}
 
 	public Mark() {
+
 	}
 
 	public Long getId() {
