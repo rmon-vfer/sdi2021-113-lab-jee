@@ -1,5 +1,10 @@
 package com.uniovi.controllers;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +19,9 @@ import com.uniovi.validators.AddMarkValidator;
 
 @Controller
 public class MarksController {
+
+	@Autowired
+	private HttpSession httpSession;
 
 	@Autowired
 	private MarksService marksService;

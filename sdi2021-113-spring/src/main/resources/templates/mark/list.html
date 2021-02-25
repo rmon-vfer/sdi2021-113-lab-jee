@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Notaneitor</title>
+<title>SDI2021-811 Marks App</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
@@ -12,7 +12,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 	<!-- Barra de Navegación superior -->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -39,17 +38,17 @@
 			</div>
 		</div>
 	</nav>
-
 	<div class="container">
 		<h2>Notas</h2>
-		<p>Las notas que actualmente figuran en el sistema son las
-			siguientes:</p>
+		<p>Las notas que actualmente figuran en el sistema son las siguientes:</p>
 		<button type="button" id="updateButton" class="btn btn-default">Actualizar</button>
+		
 		<script>
 			$("#updateButton").click(function() {
-				$("#tableMarks").load('/mark/list/update');
+				$("#tableMarks").load("/mark/list/update");
 			});
 		</script>
+		
 		<div class="table-responsive">
 			<table class="table table-hover" th:fragment="tableMarks"
 				id="tableMarks">
@@ -76,7 +75,5 @@
 			</table>
 		</div>
 	</div>
-
-
 </body>
 </html>

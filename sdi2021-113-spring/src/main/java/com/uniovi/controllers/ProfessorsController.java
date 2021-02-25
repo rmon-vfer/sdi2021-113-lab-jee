@@ -15,7 +15,7 @@ import com.uniovi.services.ProfessorsService;
 import com.uniovi.validators.AddProfessorValidator;
 
 @Controller
-public class ProfessorController {
+public class ProfessorsController {
 
 	@Autowired
 	private ProfessorsService professorService;
