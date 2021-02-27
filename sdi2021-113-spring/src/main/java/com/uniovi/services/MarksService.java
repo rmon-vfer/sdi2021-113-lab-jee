@@ -36,7 +36,6 @@ public class MarksService {
 		if (consultedList == null) {
 			consultedList = new HashSet<Mark>();
 		}
-
 		Mark obtainedMark = marksRepository.findById(id).get();
 		consultedList.add(obtainedMark);
 		httpSession.setAttribute("consultedList", consultedList);
@@ -67,6 +66,18 @@ public class MarksService {
 		}
 		if (user.getRole().equals("ROLE_PROFESSOR")) {
 			marks = getMarks();
+		}
+		return marks;
+	}
+
+	public List<Mark> searchMarksByDescriptionAndNameForUser(String searchText, User user) {
+		List<Mark> marks = new ArrayList<Mark>();
+		searchText = "%" + searchText + "%";
+		if (user.getRole().equals("ROLE_STUDENT")) {
+			marks = marksRepository.searchByDescriptionNameAndUser(searchText, user);
+		}
+		if (user.getRole().equals("ROLE_PROFESSOR")) {
+			marks = marksRepository.searchByDescriptionAndName(searchText);
 		}
 		return marks;
 	}
