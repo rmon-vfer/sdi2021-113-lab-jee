@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>SDI2021-811 Marks App</title>
+<title>SDI2021-113 Marks App</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet"
@@ -31,36 +31,41 @@
 					<li><a href="/mark/filter">Filtrar</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/registrarse"><span
-							class="glyphicon glyphicon-user"></span> Registrate</a></li>
-					<li><a href="/identificarse"><span
-							class="glyphicon glyphicon-log-in"></span> Identifícate</a></li>
+					<li><a href="/registrarse"><span class="glyphicon glyphicon-user"></span> Registrate</a></li>
+					<li><a href="/identificarse"><span class="glyphicon glyphicon-log-in"></span> Identifícate</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-
+	
 	<div class="container">
 		<h2>Notas</h2>
 		<form class="navbar-form" action="/mark/list">
 			<div class="form-group">
-				<input name="searchText" type="text" class="form-control" size="50"
-					placeholder="Buscar por descripción o nombre del alumno">
+				<input name="searchText" type="text" class="form-control" size="50" placeholder="Buscar por descripción o nombre del alumno">
 			</div>
 			<button type="submit" class="btn btn-default">Buscar</button>
 		</form>
 
-		<p>Las notas que actualmente figuran en el sistema son las
-			siguientes:</p>
+		<p>Las notas que actualmente figuran en el sistema son las siguientes:</p>
+		
 		<button type="button" id="updateButton" class="btn btn-default">Actualizar</button>
-		<script>
+			<script th:inline="javascript">
+			
+		 	/*<![CDATA[*/
 			$("#updateButton").click(function() {
-				$("#tableMarks").load("/mark/list/update");
+				 var numberPage = [[${param.page}]];
+				 var urlUpdate = '/mark/list/update';
+				 if (numberPage != null ){
+				 	urlUpdate += "?page=" + numberPage[0];
+				 }
+				 $("#tableMarks").load(urlUpdate);
 			});
+		    /*]]>*/
+
 		</script>
 		<div class="table-responsive">
-			<table class="table table-hover" th:fragment="tableMarks"
-				id="tableMarks">
+			<table class="table table-hover" th:fragment="tableMarks" id="tableMarks">
 				<thead>
 					<tr>
 						<th class="col-md-1">id</th>
@@ -77,42 +82,54 @@
 						<td th:text="${mark.description}">Ejercicio 1</td>
 						<td th:text="${mark.score}">10</td>
 						<td><a th:href="${'/mark/details/' + mark.id}">detalles</a></td>
-						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
-							th:href="${'/mark/edit/' + mark.id}">modificar</a>
+						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')" th:href="${'/mark/edit/' + mark.id}">modificar</a>
 							<div sec:authorize="hasRole('ROLE_STUDENT')">
 								<div th:if="${mark.resend}">
-									<button type="button" th:id="${'resendButton' + mark.id}"
-										class="btn btn-info">Reenviar</button>
+									<button type="button" th:id="${'resendButton' + mark.id}" class="btn btn-info">Reenviar</button>
 									<script th:inline="javascript">
+									
 									 /*<![CDATA[*/
 								 	$( "#resendButton[[${mark.id}]]" ).click(function() {
-										$.get( "/mark/[[${mark.id}]]/noresend", function( data ) {
-											$("#tableMarks").load('/mark/list/update');
-								 		});
+								 		 $.get( "/mark/[[${mark.id}]]/noresend", function( data ) {
+											 var numberPage = [[${param.page}]];
+											 var urlUpdate = '/mark/list/update';
+											 if ( numberPage != null ){
+											 	urlUpdate += "?page=" + numberPage[0];
+											 }
+											 $("#tableMarks").load(urlUpdate);
+										});
 								 	});
 									/*]]>*/
+									
 									</script>
 								</div>
 								<div th:unless="${mark.resend}">
-									<button type="button" th:id="${'noresendButton' + mark.id}"
-										class="btn btn-default">No reenviar</button>
+									<button type="button" th:id="${'noresendButton' + mark.id}" class="btn btn-default">No reenviar</button>
 									<script th:inline="javascript">
+									
 									 /*<![CDATA[*/
 								 	$( "#noresendButton[[${mark.id}]]" ).click(function() {
-										$.get( "/mark/[[${mark.id}]]/resend", function( data ) {
-											$("#tableMarks").load('/mark/list/update');
-								 		});
+								 		 $.get( "/mark/[[${mark.id}]]/resend", function( data ) {
+											 var numberPage = [[${param.page}]];
+											 var urlUpdate = '/mark/list/update';
+											 if ( numberPage != null ){
+											 	urlUpdate += "?page=" + numberPage[0];
+											 }
+											 $("#tableMarks").load(urlUpdate);
+										});
 								 	});
 									/*]]>*/
+									
 									</script>
 								</div>
 							</div></td>
-						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
-							th:href="${'/mark/delete/' + mark.id}">eliminar</a></td>
+						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')" th:href="${'/mark/delete/' + mark.id}">eliminar</a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<footer th:replace="fragments/pagination" />
 	</div>
+	<footer th:replace="fragments/footer" />
 </body>
 </html>
