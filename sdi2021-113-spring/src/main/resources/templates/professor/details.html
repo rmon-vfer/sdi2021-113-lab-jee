@@ -6,24 +6,36 @@
 <!-- Barra de Navegación superior -->
 <nav th:replace="fragments/nav" />
 	
-	<div class="container">
-		<h2>Detalles del profesor</h2>
-		<div class="panel panel-default">
-			<div class="panel-heading">DNI</div>
-			<div class="panel-body" th:text="${professor.dni}"></div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">Nombre</div>
-			<div class="panel-body" th:text="${professor.nombre}"></div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">Apellidos</div>
-			<div class="panel-body" th:text="${professor.apellidos}"></div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">Categoria</div>
-			<div class="panel-body" th:text="${professor.categoria}"></div>
-		</div>
-	</div>
+<div class="container">
+  <h2>Profesores</h2>
+  <p>Profesores en el sistema:</p>                                                                                      
+  <div class="table-responsive">          
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>DNI</th>
+        <th>Nombre</th>
+         <th>Apellidos</th>
+          <th>Categoría</th>
+		<th class="col-md-1"> </th>
+		<th class="col-md-1"> </th>
+		<th class="col-md-1"> </th>
+      </tr>
+    </thead>
+	<tbody>
+	  <tr th:each="professor : ${professors}">
+	    <td th:text="${professor.dni}"> 1</td>
+	    <td th:text="${professor.nombre}"> A</td>
+	    <td th:text="${professor.apellidos}"> A</td>
+	    <td th:text="${professor.categoria}"> A</td>
+	    <td><a sec:authorize="hasAnyRole('ROLE_PROFESSOR','ROLE_ADMIN')" th:href="${'/professor/detail/' + professor.dni}">Detalles</a></td>
+	    <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/professor/edit/' + professor.dni}">Modificar</a></td>
+	    <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/professor/delete/' + professor.dni}">Eliminar</a></td>
+	  </tr>
+	</tbody>
+  </table>
+  </div>
+</div>
+	
 </body>
 </html>
