@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>Notaneitor</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Notaneitor</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
 
 	<!-- Barra de Navegación superior -->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
 				<img src="/img/student-48.png" alt="logo" />
 			</div>
@@ -32,10 +29,8 @@
 					<li><a href="/professor/filter">Filtrar</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/registrarse"><span
-							class="glyphicon glyphicon-user"></span> Registrate</a></li>
-					<li><a href="/identificarse"><span
-							class="glyphicon glyphicon-log-in"></span> Identifícate</a></li>
+					<li><a href="/registrarse"><span class="glyphicon glyphicon-user"></span> Registrate</a></li>
+					<li><a href="/identificarse"><span class="glyphicon glyphicon-log-in"></span> Identifícate</a></li>
 				</ul>
 			</div>
 		</div>
@@ -43,38 +38,33 @@
 
 	<div class="container">
 		<h2>Agregar Profesor</h2>
-		<form class="form-horizontal" method="post" action="/professor/add"
-			th:object="${professor}">
+		<form class="form-horizontal" method="post" action="/professor/add" th:object="${professor}">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="description">DNI:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="dni" placeholder=""
-						required="true" /> <span class="text-danger"
-						th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></span>
+					<input type="text" class="form-control" name="dni" placeholder="" required="true" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></span>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd">Nombre:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="nombre"
-						placeholder="" required="true" /> <span class="text-danger"
-						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+					<input type="text" class="form-control" name="nombre" placeholder="" required="true" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd">Apellidos:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="apellidos"
-						placeholder="" required="true" /> <span class="text-danger"
-						th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></span>
+					<input type="text" class="form-control" name="apellidos" placeholder="" required="true" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></span>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd">Categoría:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="categoria"
-						placeholder="" required="true" /> <span class="text-danger"
-						th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></span>
+					<input type="text" class="form-control" name="categoria" placeholder="" required="true" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></span>
 				</div>
 			</div>
 			<div class="form-group">
@@ -84,6 +74,5 @@
 			</div>
 		</form>
 	</div>
-
 </body>
 </html>

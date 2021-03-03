@@ -69,5 +69,4 @@ public class ProfessorsController {
 		professorService.deleteProfessor(dni);
 		return "redirect:/professor/list";
 	}
-
 }

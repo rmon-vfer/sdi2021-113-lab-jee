@@ -1,0 +1,23 @@
+<!-- Tabla de HOME -->
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th class="col-md-1">Id</th>
+			<th>Descripción</th>
+			<th>Puntuación</th>
+			<th class="col-md-1"></th>
+			<th class="col-md-1"></th>
+			<th class="col-md-1"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="mark : ${markList}">
+			<td th:text="${mark.id}"></td>
+			<td th:text="${mark.description}">Ejercicio 1</td>
+			<td th:text="${mark.score}"></td>
+			<td><a th:href="${'/mark/details/' + mark.id}">Detalles</a></td>
+			<td><a sec:authorize="hasRole('ROLE_PROFESSOR')" th:href="${'/mark/edit/' + mark.id}">Modificar</a></td>
+			<td><a sec:authorize="hasRole('ROLE_PROFESSOR')" th:href="${'/mark/delete/' + mark.id}">Eliminar</a></td>
+		</tr>
+	</tbody>
+</table>
