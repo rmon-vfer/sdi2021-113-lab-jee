@@ -22,9 +22,7 @@ public class Professor {
 		this.categoria = categoria;
 	}
 
-	public Professor() {
-
-	}
+	public Professor() { /**/ }
 
 	public String getDni() {
 		return dni;

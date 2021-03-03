@@ -13,27 +13,34 @@ import com.uniovi.repositories.ProfessorsRepository;
 public class ProfessorsService {
 
 	@Autowired
-	private ProfessorsRepository professorRepository;
+	private ProfessorsRepository professorsRepository;
 
 	public List<Professor> getProfessors() {
 		List<Professor> professors = new ArrayList<Professor>();
-		professorRepository.findAll().forEach(professors::add);
+		professorsRepository.findAll().forEach(professors::add);
 		return professors;
 	}
 
 	public Professor getProfessor(Long dni) {
-		return professorRepository.findById(dni).get();
+		return professorsRepository.findById(dni).get();
 	}
 
 	public void addProfessor(Professor prof) {
-		professorRepository.save(prof);
+		professorsRepository.save(prof);
 	}
 
 	public void deleteProfessor(Long id) {
-		professorRepository.deleteById(id);
+		professorsRepository.deleteById(id);
 	}
 
 	public Professor getProfessorByDni(String dni) {
-		return professorRepository.findByDni(dni);
+		return professorsRepository.findByDni(dni);
+	}
+
+	public List<Professor> searchByFullName(String searchText) {
+		List<Professor> professors = new ArrayList<Professor>();
+		professors = professorsRepository.searchByFullName(searchText);
+
+		return professors;
 	}
 }

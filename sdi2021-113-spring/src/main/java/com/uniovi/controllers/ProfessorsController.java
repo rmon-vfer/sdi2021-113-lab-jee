@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uniovi.entities.Professor;
 import com.uniovi.services.ProfessorsService;
@@ -24,8 +25,14 @@ public class ProfessorsController {
 	private AddProfessorValidator addProfessorValidator;
 
 	@RequestMapping("/professor/list")
-	public String getList(Model model) {
-		model.addAttribute("professors", professorService.getProfessors());
+	public String getList(Model model, @RequestParam(value="", required=false) String searchText) {
+		if ( searchText != null && !searchText.isEmpty() ) {
+			model.addAttribute( "professors", professorService.searchByFullName( searchText ));
+			
+		} else {
+			model.addAttribute("professors", professorService.getProfessors());
+		}
+
 		return "/professor/list";
 	}
 

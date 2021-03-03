@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head th:replace="fragments/head" />
+<head th:replace="fragments/head" />
 <body>
 
-<!-- Barra de Navegación superior -->
-<nav th:replace="fragments/nav" />
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
 
-<div class="container">
-  <h2>Profesores</h2>
-  <p>Profesores que constan en el sistema:</p>                                                                                      
-  <div class="table-responsive">          
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th class="col-md-1">id</th>
-		<th class="col-md-1">DNI</th>
-		<th class="col-md-1">Nombre</th>
-		<th class="col-md-1">Apellidos</th>
-		<th class="col-md-1">Categoria</th>
-      </tr>
-    </thead>
-	<tbody>
-	  <tr th:each="professor : ${professorList}">
-	    <td th:text="${professor.id}"></td>
-	    <td th:text="${professor.nombre"></td>
-	    <td th:text="${professor.apellidos}"></td>
-	    <td th:text="${professor.categoria}"></td>
-	  </tr>
-	</tbody>
-  </table>
-  </div>
-</div>
+	<div class="container">
+		<h2>Profesores</h2>
+		<form class="navbar-form" action="/mark/list">
+			<div class="form-group">
+				<input name="searchText" type="text" class="form-control" size="50"
+					placeholder="Buscar por descripción o nombre del alumno">
+			</div>
+			<button type="submit" class="btn btn-default">Buscar</button>
+		</form>
+
+		<p>Profesores que constan en el sistema:</p>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="col-md-1">id</th>
+						<th class="col-md-1">DNI</th>
+						<th class="col-md-1">Nombre</th>
+						<th class="col-md-1">Apellidos</th>
+						<th class="col-md-1">Categoria</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="professor : ${professorList}">
+						<td th:text="${professor.id}"></td>
+						<td th:text="${professor.nombre"></td>
+						<td th:text="${professor.apellidos}"></td>
+						<td th:text="${professor.categoria}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 
 </body>
